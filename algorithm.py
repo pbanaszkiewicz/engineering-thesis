@@ -5,6 +5,9 @@
 Algorithm scaffolding (based on a state machine).
 """
 
+import asyncio
+from functools import partial
+
 
 def turn_off():
     """Cut off the power from the batteries to the engine."""
