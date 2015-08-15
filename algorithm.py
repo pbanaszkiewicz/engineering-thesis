@@ -18,6 +18,10 @@ def turn_on():
     """Bring back the power to the engine."""
     pass
 
+# define constants (states)
+STATES = list(range(8))
+START, CONNECTION_WAIT, CONNECTED, DIAGNOSTIC_DATA = STATES[0:4]
+PING, PONG_WAIT, STOP, RESET = STATES[4:8]
 
 if __name__ == '__main__':
     state = START
