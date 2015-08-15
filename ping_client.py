@@ -1,29 +1,32 @@
 #!/usr/bin/env python3
 # coding: utf-8
 
-from itertools import count
-import time
-import socket
-import sys
+import asyncio
 
 
-if __name__ == "__main__":
-    try:
-        HOST = str(sys.argv[1])
-    except (IndexError, ValueError):
-        HOST = "localhost"
+class TCPPingProtocol(asyncio.Protocol):
+    def __init__(self, message, loop):
+        self.message = message
+        self.loop = loop
 
-    try:
-        PORT = int(sys.argv[2])
-    except (IndexError, ValueError):
-        PORT = 9876
+    def connection_made(self, transport):
+        transport.write(self.message.encode())
+        print('Data sent: {!r}'.format(self.message))
 
-    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    def data_received(self, data):
+        print('Data received: {!r}'.format(data.decode()))
 
-    for i in count(1):
-        data = bytes("{}".format(i), encoding="utf-8")
-        sock.sendto(data, (HOST, PORT))
-        print("Sent PING {}".format(data))
-        rcv = sock.recv(1024)
-        print("Received PONG {}".format(rcv))
-        time.sleep(1)
+    def connection_lost(self, exc):
+        print('The server closed the connection')
+        print('Stop the event lop')
+        self.loop.stop()
+
+
+if __name__ == '__main__':
+    loop = asyncio.get_event_loop()
+    message = 'Hello World!'
+    coro = loop.create_connection(lambda: TCPPingProtocol(message, loop),
+                                  '127.0.0.1', 8888)
+    loop.run_until_complete(coro)
+    loop.run_forever()
+    loop.close()
