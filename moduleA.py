@@ -16,7 +16,7 @@ if __name__ == '__main__':
     GPIO.setmode(GPIO.BCM)  # SoC numbering of pins
 
     GPIO.setup(17, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-    # GPIO.setup(27, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)  # 21 in rev1
+    GPIO.setup(27, GPIO.OUT)  # 21 in rev1
 
     GPIO.add_event_detect(17, GPIO.RISING, callback=stop_btn,
                           bouncetime=300)
@@ -25,6 +25,7 @@ if __name__ == '__main__':
         while True:
             time.sleep(1)
 
+            GPIO.output(27, True)
             if STOP_SEND:
                 # send PING and STOP
                 STOP_SEND = False
@@ -33,6 +34,8 @@ if __name__ == '__main__':
             else:
                 # send only PING
                 print "[SENDING] ping"
+
+            GPIO.output(27, False)
 
     except KeyboardInterrupt:
         pass
