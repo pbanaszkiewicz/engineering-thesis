@@ -1,8 +1,14 @@
+import time
+
 import RPi.GPIO as GPIO
+
+# globals, we love them, don't we
+RST_SEND = False
 
 
 def reset_btn(channel):
-    print "Reset Button PRESSED"
+    print "[PRESSED] reset"
+    RST_SEND = True
 
 
 if __name__ == '__main__':
@@ -16,7 +22,13 @@ if __name__ == '__main__':
 
     try:
         while True:
-            pass
+            time.sleep(1)
+            # send PING
+
+            if RST_SEND:
+                # send RESET
+                RST_SEND = False
+
     except KeyboardInterrupt:
         pass
     finally:
