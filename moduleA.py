@@ -24,10 +24,12 @@ if __name__ == '__main__':
         while True:
             time.sleep(1)
             # send PING
+            print "[SENDING] ping"
 
             if RST_SEND:
                 # send RESET
                 RST_SEND = False
+                print "[SENDING] reset"
 
     except KeyboardInterrupt:
         pass
