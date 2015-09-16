@@ -3,12 +3,13 @@ import time
 import RPi.GPIO as GPIO
 
 # globals, we love them, don't we
-RST_SEND = False
+STOP_SEND = False
 
 
-def reset_btn(channel):
-    print "[PRESSED] reset"
-    RST_SEND = True
+def stop_btn(channel):
+    global STOP_SEND
+    print "[PRESSED] stop"
+    STOP_SEND = True
 
 
 if __name__ == '__main__':
@@ -17,19 +18,21 @@ if __name__ == '__main__':
     GPIO.setup(17, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
     # GPIO.setup(27, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)  # 21 in rev1
 
-    GPIO.add_event_detect(17, GPIO.RISING, callback=reset_btn,
+    GPIO.add_event_detect(17, GPIO.RISING, callback=stop_btn,
                           bouncetime=300)
 
     try:
         while True:
             time.sleep(1)
-            # send PING
-            print "[SENDING] ping"
 
-            if RST_SEND:
-                # send RESET
-                RST_SEND = False
-                print "[SENDING] reset"
+            if STOP_SEND:
+                # send PING and STOP
+                STOP_SEND = False
+                print "[SENDING] stop & ping"
+
+            else:
+                # send only PING
+                print "[SENDING] ping"
 
     except KeyboardInterrupt:
         pass
