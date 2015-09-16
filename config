@@ -1,0 +1,14 @@
+/etc/network/interfaces:
+
+allow-hotplug wlan0
+auto wlan0
+iface wlan0 inet dhcp
+    wpa-ssid "ssid"
+    wpa-psk "password"
+
+/etc/network/interfaces alternative:
+
+iface wlan0 inet static
+  address 192.168.1.150
+  netmask 255.255.255.0
+  gateway 192.168.1.100
