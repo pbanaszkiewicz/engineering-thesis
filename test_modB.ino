@@ -1,41 +1,69 @@
-//#include <SoftwareSerial.h>
-//SoftwareSerial antenna(2, 3);
-
 int counter = 0;
-const int led_pin = 13;
-bool led_status = true;
+
+// LEDs
+const int red_led_pin = 7;
+bool red_led = false;
+const int green_led_pin = 6;
+bool green_led = false;
+
+// application states
+const int WAIT = 0;
+const int RUN = 1;
+const int STOP = 2;
+
+// initial state
+int state = WAIT;
+
+// useful input string variable
+String input;
 
 void setup() {
-  pinMode(led_pin, OUTPUT);
+  pinMode(red_led_pin, OUTPUT);
+  pinMode(green_led_pin, OUTPUT);
+  pinMode(13, OUTPUT);
+
+  // start serial connection
   Serial1.begin(9600);  // pins 0 and 1
-  Serial1.println("Starting conversation");
   Serial.begin(9600);
-  Serial.println("Starting conversation with computer");
-  //antenna.begin(9600);
-  //antenna.println("Starting conversation");
+
+  Serial1.setTimeout(1000);
 }
 
 void loop() {
-  if (Serial.available()) {
-    Serial1.write(Serial.read());
+  if (state == WAIT) {
+    // wait for the activation data (greetings) && blink red
+    
+    if (Serial1.available()) {
+      input = Serial1.readStringUntil(' ');
+    }
+
+    if (input == "Start") {
+      input = "";
+      state = RUN;
+      Serial1.print("Started ");
+    } else {
+      Serial.write(input.c_str());
+      input = "";
+      blink(red_led_pin);
+    }
+    
+  } else if (state == RUN) {
+    // running
+    
+    if (Serial1.available()) {
+      input = Serial1.readStringUntil(' ');
+    }
+    
+    green_led = !green_led;
+    digitalWrite(green_led_pin, green_led);
+    delay(1000);
   }
-  if (Serial1.available()) {
-    Serial.write(Serial1.read());
-  }
-  //Serial1.println("Hello");
-  //antenna.println("Hello");
-  //if (Serial.available()) {
-  //Serial.println(Serial1.readStringUntil('\n'));
-  //Serial.write(Serial1.read());
-  //Serial.write(antenna.read());
-  //}
-  led_status = !led_status;
-  digitalWrite(led_pin, led_status);
-  delay(100);
-//  antenna.write(counter++);
-//    
-//  led_status = !led_status;
-//  digitalWrite(led_pin, led_status);
-//  
-//  delay(1000);
 }
+
+void blink(int pin) {
+  digitalWrite(pin, HIGH);
+  delay(100);
+  digitalWrite(pin, LOW);
+  delay(100);
+}
+

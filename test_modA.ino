@@ -1,42 +1,46 @@
-//#include <SoftwareSerial.h>
-//SoftwareSerial antenna(2, 3);
-
 int counter = 0;
-const int led_pin = 13;
-bool led_status = true;
+
+// LEDs
+const int green_led_pin = 7;
+bool green_led = false;
+
+// application states
+const int CONNECTING = 0;
+const int PING = 1;
+const int STOP = 2;
+
+// initial state
+int state = CONNECTING;
+
+// useful input string variable
+String input;
 
 void setup() {
-  pinMode(led_pin, OUTPUT);
+  pinMode(green_led_pin, OUTPUT);
   Serial.begin(9600);
-  
-  Serial.println("Starting conversation");
-  //antenna.begin(9600);
 }
 
 void loop() {
-//  if (Serial.available()) {
-//    Serial.read();
-//    Serial.println("Hello");
-//    led_status = !led_status;
-//    digitalWrite(led_pin, led_status);
-//  }
-  Serial.println("Hello");
-  led_status = !led_status;
-  digitalWrite(led_pin, led_status);
-  delay(1000);
-//  if (antenna.available()) {
-//    Serial.print(antenna.read());
-//    //counter = Serial.parseInt();
-//    
-//    led_status = !led_status;
-//    digitalWrite(led_pin, led_status);
-//  }
-//  
-//  if (counter % 10 == 0) {
-//    Serial.println("test message");
-//  }
-//  
-//  delay(1000);
-//  
-//  counter++;
+  if (state == CONNECTING) {
+    // try to initialize the conversation
+    
+    if (!Serial.available()) {
+      // send greetings
+      Serial.print("Start ");
+      
+      green_led = !green_led;
+      digitalWrite(green_led_pin, green_led);
+      delay(1000);
+      
+    } else {
+      // receive RSVP
+      input = Serial.readStringUntil(' ');
+
+      if (input == "Started") {
+        state = PING;
+      }
+    }
+  } else if (state == PING) {
+    
+  }
 }
