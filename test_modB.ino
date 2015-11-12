@@ -17,13 +17,19 @@ const unsigned int STOP = 2;
 // initial state
 unsigned int state = WAIT;
 
-// I/O
-String input;
-const byte packet_end = 0x00;
-const unsigned int packet_length = 4;
+struct package {
+  byte emergency;
+  unsigned int counter;
+  byte stop;
+};
 
-byte in_buffer[packet_length] = {0x00, 0x00, 0x00, 0x00};
-byte out_buffer[packet_length] = {0x00, 0x00, 0x00, 0x00};
+// I/O
+//String input;
+const byte package_end = 0x00;
+const unsigned int package_length = 4;
+
+byte in_buffer[package_length] = {0x00, 0x00, 0x00, 0x00};
+byte out_buffer[package_length] = {0x00, 0x00, 0x00, 0x00};
 
 void setup() {
   pinMode(red_led_pin, OUTPUT);
@@ -31,8 +37,9 @@ void setup() {
   pinMode(relay_pin, OUTPUT);
 
   // start serial connection
-  Serial.begin(9600);  // pins 0 and 1
-  Serial.setTimeout(1000);
+  Serial1.begin(9600);  // pins 0 and 1
+  Serial1.setTimeout(1000);
+  //Serial.begin(9600);
 
   digitalWrite(green_led_pin, green_led);
   disableRelay(relay_pin);
@@ -42,19 +49,20 @@ void loop() {
   if (state == WAIT) {
     // wait for the activation data (greetings) && blink red
     
-    if (Serial.available()) {
-      Serial.readBytesUntil(packet_end, in_buffer, packet_length);
+    if (Serial1.available()) {
+      Serial1.readBytesUntil(package_end, in_buffer, package_length);
 
       if (isConversationStart(in_buffer)) {
         // correctly started the conversation
         state = RUN;
-        
+
         // correct response
         out_buffer[0] = 0x11;
         out_buffer[1] = 0xFF;
         out_buffer[2] = 0xFF;
         out_buffer[3] = 0x00;
-        Serial.write(out_buffer, packet_length);
+        
+        Serial1.write(out_buffer, package_length);
         
       } else {
         // something's wrong, that's not the start of the conversation
@@ -63,6 +71,7 @@ void loop() {
 
     red_led = !red_led;
     digitalWrite(red_led_pin, red_led);
+    delay(100);
     
   } else if (state == RUN) {
     // running
@@ -73,9 +82,9 @@ void loop() {
     digitalWrite(red_led_pin, red_led);
     enableRelay(relay_pin);
     
-    if (Serial.available()) {
+    if (Serial1.available()) {
       ++counter;
-      Serial.readBytesUntil(packet_end, in_buffer, packet_length);
+      Serial1.readBytes(in_buffer, package_length);
 
       if (readEmergencyByte(in_buffer) == 0xFF) {
         state = STOP;
@@ -84,6 +93,7 @@ void loop() {
       }
     } else {
       // no response, therefore we should stop?
+      // TODO: add action for no response in time (maybe "error counter"?)
     }
     
     delay(1000);
