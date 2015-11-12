@@ -39,7 +39,6 @@ void loop() {
     // try to initialize the conversation
     
     if (Serial.available()) {
-      digitalWrite(13, HIGH);
       // receive RSVP
       Serial.readBytesUntil(package_end, in_buffer, package_length);
 
