@@ -1,4 +1,5 @@
 unsigned int counter = 0;
+unsigned int no_data_counter = 0;
 
 // LEDs
 const unsigned int red_led_pin = 7;
@@ -37,9 +38,8 @@ void setup() {
   pinMode(relay_pin, OUTPUT);
 
   // start serial connection
-  Serial1.begin(9600);  // pins 0 and 1
-  Serial1.setTimeout(1000);
-  //Serial.begin(9600);
+  Serial.begin(9600);  // pins 0 and 1
+  Serial.setTimeout(1000);
 
   digitalWrite(green_led_pin, green_led);
   disableRelay(relay_pin);
@@ -49,8 +49,8 @@ void loop() {
   if (state == WAIT) {
     // wait for the activation data (greetings) && blink red
     
-    if (Serial1.available()) {
-      Serial1.readBytesUntil(package_end, in_buffer, package_length);
+    if (Serial.available()) {
+      Serial.readBytesUntil(package_end, in_buffer, package_length);
 
       if (isConversationStart(in_buffer)) {
         // correctly started the conversation
@@ -62,7 +62,7 @@ void loop() {
         out_buffer[2] = 0xFF;
         out_buffer[3] = 0x00;
         
-        Serial1.write(out_buffer, package_length);
+        Serial.write(out_buffer, package_length);
         
       } else {
         // something's wrong, that's not the start of the conversation
@@ -82,21 +82,31 @@ void loop() {
     digitalWrite(red_led_pin, red_led);
     enableRelay(relay_pin);
     
-    if (Serial1.available()) {
+    if (Serial.available()) {
+      no_data_counter = 0;
       ++counter;
-      Serial1.readBytes(in_buffer, package_length);
+      
+      Serial.readBytes(in_buffer, package_length);
 
       if (readEmergencyByte(in_buffer) == 0xFF) {
         state = STOP;
       } else if (counter != readCounter(in_buffer)) {
         state = STOP;
+      } else {
+        delay(1000);
       }
+      
     } else {
-      // no response, therefore we should stop?
-      // TODO: add action for no response in time (maybe "error counter"?)
+      // no response, therefore we should stop
+      ++no_data_counter;
+      
+      if (no_data_counter == 3) {
+        state = STOP;
+      } else {
+        delay(1000);
+      }
     }
     
-    delay(1000);
     
   } else if (state == STOP) {
     disableRelay(relay_pin);
