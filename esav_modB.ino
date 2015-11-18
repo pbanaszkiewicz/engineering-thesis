@@ -98,12 +98,12 @@ void loop() {
       
     } else {
       // no response, therefore we should stop
-      ++no_data_counter;
       
       if (no_data_counter == 3) {
         state = STOP;
       } else {
         delay(1000);
+        ++no_data_counter;
       }
     }
     
