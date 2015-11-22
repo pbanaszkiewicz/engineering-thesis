@@ -4,7 +4,7 @@ unsigned int counter = 0;
 const unsigned int green_led_pin = 7;
 bool green_led = false;
 
-const unsigned int reset_pin = 2;
+const unsigned int stop_pin = 2;
 
 // application states
 const unsigned int CONNECTING = 0;
@@ -21,17 +21,19 @@ const unsigned int package_length = 4;
 byte in_buffer[package_length] = {0x00, 0x00, 0x00, 0x00};
 byte out_buffer[package_length] = {0x00, 0x00, 0x00, 0x00};
 
+const byte encryption_key[package_length] = {0x17, 0x02, 0xB8, 0x54};
+
 // for handling emergency interrupt
 volatile bool emergency = false;
 
 void setup() {
   pinMode(green_led_pin, OUTPUT);
-  pinMode(reset_pin, INPUT);
+  pinMode(stop_pin, INPUT);
   
   Serial.begin(9600);  // pins 0 and 1
   Serial.setTimeout(1000);
   
-  attachInterrupt(digitalPinToInterrupt(reset_pin), emergencyInterrupt, RISING);
+  attachInterrupt(digitalPinToInterrupt(stop_pin), emergencyInterrupt, RISING);
 }
 
 void loop() {
@@ -108,5 +110,17 @@ void setEmergency(byte* buf) {
 
 void emergencyInterrupt() {
   emergency = true;
+}
+
+void encrypt(byte* buf, const byte* key, unsigned int length) {
+  for (int i = 0; i < length; i++) {
+    buf[i] = buf[i] ^ key[i];  // XOR
+  }
+}
+
+void decrypt(byte* buf, const byte* key, unsigned int length) {
+  for (int i = 0; i < length; i++) {
+    buf[i] = buf[i] ^ key[i];  // XOR
+  }
 }
 

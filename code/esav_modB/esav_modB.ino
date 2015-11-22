@@ -18,19 +18,14 @@ const unsigned int STOP = 2;
 // initial state
 unsigned int state = WAIT;
 
-struct package {
-  byte emergency;
-  unsigned int counter;
-  byte stop;
-};
-
 // I/O
-//String input;
 const byte package_end = 0x00;
 const unsigned int package_length = 4;
 
 byte in_buffer[package_length] = {0x00, 0x00, 0x00, 0x00};
 byte out_buffer[package_length] = {0x00, 0x00, 0x00, 0x00};
+
+const byte encryption_key[package_length] = {0x17, 0x02, 0xB8, 0x54};
 
 void setup() {
   pinMode(red_led_pin, OUTPUT);
@@ -143,4 +138,16 @@ byte readStopByte(byte* buf) {
 
 bool isConversationStart(byte* buf) {
   return buf[0] == 0xFF && buf[1] == 0xFF && buf[2] == 0xFF && buf[3] == 0x00;
+}
+
+void encrypt(byte* buf, const byte* key, unsigned int length) {
+  for (int i = 0; i < length; i++) {
+    buf[i] = buf[i] ^ key[i];  // XOR
+  }
+}
+
+void decrypt(byte* buf, const byte* key, unsigned int length) {
+  for (int i = 0; i < length; i++) {
+    buf[i] = buf[i] ^ key[i];  // XOR
+  }
 }
