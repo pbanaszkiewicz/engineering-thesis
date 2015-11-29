@@ -1,3 +1,5 @@
+#include <encryption_lib.h>
+
 unsigned int counter = 0;
 
 // LEDs
@@ -54,7 +56,7 @@ void loop() {
       out_buffer[1] = 0xFF;
       out_buffer[2] = 0xFF;
       out_buffer[3] = 0x00;
-      
+
       Serial.write(out_buffer, package_length);
       
       green_led = !green_led;
@@ -75,6 +77,7 @@ void loop() {
       digitalWrite(green_led_pin, green_led);
       
       writeCounter(counter, out_buffer);
+      encrypt_array(out_buffer, package_length);
       Serial.write(out_buffer, package_length);
       
       green_led = false;
@@ -110,17 +113,5 @@ void setEmergency(byte* buf) {
 
 void emergencyInterrupt() {
   emergency = true;
-}
-
-void encrypt(byte* buf, const byte* key, unsigned int length) {
-  for (int i = 0; i < length; i++) {
-    buf[i] = buf[i] ^ key[i];  // XOR
-  }
-}
-
-void decrypt(byte* buf, const byte* key, unsigned int length) {
-  for (int i = 0; i < length; i++) {
-    buf[i] = buf[i] ^ key[i];  // XOR
-  }
 }
 

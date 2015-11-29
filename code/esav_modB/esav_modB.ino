@@ -1,3 +1,5 @@
+#include <encryption_lib.h>
+
 unsigned int counter = 0;
 unsigned int no_data_counter = 0;
 
@@ -82,6 +84,7 @@ void loop() {
       ++counter;
       
       Serial.readBytes(in_buffer, package_length);
+      decrypt_array(in_buffer, package_length);
 
       if (readEmergencyByte(in_buffer) == 0xFF) {
         state = STOP;
@@ -140,14 +143,3 @@ bool isConversationStart(byte* buf) {
   return buf[0] == 0xFF && buf[1] == 0xFF && buf[2] == 0xFF && buf[3] == 0x00;
 }
 
-void encrypt(byte* buf, const byte* key, unsigned int length) {
-  for (int i = 0; i < length; i++) {
-    buf[i] = buf[i] ^ key[i];  // XOR
-  }
-}
-
-void decrypt(byte* buf, const byte* key, unsigned int length) {
-  for (int i = 0; i < length; i++) {
-    buf[i] = buf[i] ^ key[i];  // XOR
-  }
-}
