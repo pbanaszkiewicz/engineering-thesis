@@ -23,8 +23,6 @@ const unsigned int package_length = 4;
 byte in_buffer[package_length] = {0x00, 0x00, 0x00, 0x00};
 byte out_buffer[package_length] = {0x00, 0x00, 0x00, 0x00};
 
-const byte encryption_key[package_length] = {0x17, 0x02, 0xB8, 0x54};
-
 // for handling emergency interrupt
 volatile bool emergency = false;
 
