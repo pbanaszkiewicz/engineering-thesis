@@ -23,3 +23,5 @@ clean :
 	@rm *.run.xml
 	@rm *.toc
 	@rm *.synctex.gz
+	@rm *.lof
+	@rm *.lot
