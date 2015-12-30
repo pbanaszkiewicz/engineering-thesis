@@ -55,8 +55,8 @@ Sama pojemność 10000mAh teoretycznie\footnote{W praktyce pojemność 10000mAh 
 
 Do komunikacji wykorzystano parę modułów radiowych HC-12 433 MHz \cite{HC12}, które łączą się z~platformami sprzętowymi za pomocą łącza szeregowego. Prędkość komunikacji takiego modułu w powietrzu wynosi 5000bps, czyli typowe pakiety przesyłane przez system (zob. rozdział \ref{subsec:format_pakietow}), mające rozmiar $ 4B=32b $ są przesyłane w ułamku sekundy.
 
-\subsection{Obudowy i montaż}
-\label{subsec:obudowy_montaz}
+\subsection{Obudowy}
+\label{subsec:obudowy}
 
 Dla każdego modułu systemu ESAV przygotowano sztywną nakładkę w formie płytki prototypowej (zdjęcia \ref{fig:moduleA_hat} i \ref{fig:moduleB_hat}) z~przylutowanymi komponentami wykorzystywanymi przez dany moduł. Zakładane są one na górne i dolne piny modułów A i B (zob. zdjęcie \ref{fig:arduino_pro}).
 
@@ -68,13 +68,25 @@ Dla każdego modułu systemu ESAV przygotowano sztywną nakładkę w formie pły
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.3]{pics/moduleB_hat.jpg}
+	\includegraphics[scale=0.25]{pics/moduleB_hat.jpg}
 	\caption{\label{fig:moduleB_hat}Nakładka na moduł B (zdjęcie: Piotr Banaszkiewicz).}
 \end{figure}
 
 Ponadto na każdą platformę została zaprojektowana obudowa. Na zdjęciu \ref{fig:arduino_pro} widać cztery otwory w platformie Arduino (dwa przy lewej krawędzi płytki PCB oraz dwa przy prawej krawędzi), które zostały użyte do przykręcenia każdej z platform do obudowy.
 
-Obudowy zostały wydrukowane w drukarce 3D.  %% DODAJ ZDJĘCIE PROJEKTÓW OBUDÓW
+Obudowy bazują na istniejącym projekcie kontenerów dla Arduino Leonardo oraz Uno wykonanym przez Zygmunta Wojcika  \cite{Woj15}. Ich licencja zezwala na modyfikacje (więcej szczegółów dostępnych jest pod adresem \cite{CasesLicense}).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.3]{pics/moduleA_case.png}
+	\caption{\label{fig:moduleA_case}Obudowa modułu A (oryginalny autor: Zygmunt Wojcik, modyfikacje: Piotr Banaszkiewicz \cite{CasesLicense}).}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.3]{pics/moduleB_case.png}
+	\caption{\label{fig:moduleB_case}Obudowa modułu B (oryginalny autor: Zygmunt Wojcik, modyfikacje: Piotr Banaszkiewicz \cite{CasesLicense}).}
+\end{figure}
 
 \subsection{Schematy połączeń}
 \label{subsec:schematy_polaczen}
@@ -157,6 +169,8 @@ Przekaźnik został umieszczony na radiatorze i pracował przez kilka minut (do 
 	\includegraphics[scale=0.8]{flir/IR_5167.jpg}
 	\caption{\label{fig:flir1}Obraz uzyskany za pomocą kamery termowizyjnej na koniec trwania eksperymentu z mniejszym obciążeniem (zdjęcie: Marek Długosz).}
 \end{figure}
+
+\raggedbottom
 
 \begin{figure}[H]
 	\centering
@@ -418,7 +432,7 @@ Numer wymagania & Wymagane? & Spełnione? & Jak? & Ref. \\
 1.6.4 & Tak & Tak & Spełnione dosłownie. & \ref{subsec:panel_operatorski} \\ \hline
 1.6.5 & Nie & Nie & Poziom naładowania jest wyświetlany na obudowie powerbanku, więc nie ma konieczności dodatkowego monitorowania przez moduł B. & \ref{subsec:zasilanie} \\ \hline
 1.6.6 & Tak & Tak & Spełnione dosłownie. & \ref{subsec:panel_operatorski} \\ \hline
-1.6.7 & Tak & Tak & Spełnione dosłownie. & \ref{subsec:obudowy_montaz} \\ \hline
+1.6.7 & Tak & Tak & Spełnione dosłownie. & \ref{subsec:obudowy} \\ \hline
 1.6.8 & Tak & Tak & Wysłanie pakietu danych jest rozumiane jako ,,PING''. & \ref{subsec:format_pakietow} \\ \hline
 1.6.9 & Tak & Tak & Opisane w formacie pakietów. & \ref{subsec:format_pakietow} \\ \hline
 1.6.10 & Nie & Nie & Niewymagane. &  \\ \hline
