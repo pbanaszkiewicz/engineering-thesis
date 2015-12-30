@@ -2,11 +2,15 @@
 ## A Bachelor's Engineering Thesis project
 
 This repository contains my BEng Thesis and project files.
-The Thesis itself will be in Polish, but other sources should be
+The Thesis itself will be in Polish, but other resources should be
 in English.
 
-## To-Do
+## Compilation
 
-* instructions for settings RPi WiFi Ad-Hoc connection
-* PoC ping in Python
-* measure max successful communication distance
+You can create a `main.pdf` containing the Thesis with following command:
+
+```bash
+$ make pdf
+```
+
+To remove all the debris from LaTeX use `make clean`.
