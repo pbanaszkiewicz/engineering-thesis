@@ -14,3 +14,8 @@ $ make pdf
 ```
 
 To remove all the debris from LaTeX use `make clean`.
+
+## Credits
+
+LaTeX class for AGH-UST specific representation of the Thesis was made by
+M. Szpyrka and others (see `aghdpl.cls` for more).
