@@ -320,7 +320,7 @@ Platforma Arduino Pro, w przeciwieństwie do innych większych mikrokontrolerów
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.5]{pics/konwerter-usb-uart-ft232-33-5v.jpg}
-	\caption{\label{fig:arduino_ide}Opis wyjść używanego konwertera USB-UART (zdjęcie: Botland \cite{KonwerterBotland})}
+	\caption{\label{fig:arduino_ide}Opis wyjść używanego konwertera USB-UART (zdjęcie: Botland \cite{KonwerterBotland}).}
 \end{figure}
 
 Niestety używany konwerter USB-UART posiada zgodne wyprowadzenia (zob. powyższe zdjęcie), ale w nieodpowiedniej kolejności, co zostało przedstawione w tabeli \ref{tab:piny}.
@@ -334,7 +334,7 @@ Niestety używany konwerter USB-UART posiada zgodne wyprowadzenia (zob. powyższ
         
         \begin{tabular}{cc}
             \toprule
-            Wyprowadzenie Arduino Pro & Wyprowadzenie konwerter USB-UART \\
+            Wyprowadzenie Arduino Pro & Wyprowadzenie konwertera USB-UART \\
             \midrule
             RST & GND \\
             TX & TXD \\
@@ -358,9 +358,15 @@ Podłączenia wymagane do prawidłowego zaprogramowania Arduino Pro:
 \item GND $\rightarrow$ GND
 \end{itemize}
 
-W związku z tym konieczne stało się stworzenie kabla pozwalającego łatwo programować moduły systemu ESAV.
+W związku z tym konieczne stało się stworzenie kabla pozwalającego łatwo programować moduły systemu ESAV. Został on zbudowany na podstawie tzw. skrętki ethernetowej (zdjęcie \ref{fig:cable}).
 
-%% DODAJ ZDJĘCIA KABLI ETC.
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.3]{pics/cable.jpg}
+	\caption{\label{fig:cable}Zdjęcie kabla wykorzystywanego do programowania Arduino (zdjęcie: Piotr Banaszkiewicz).}
+\end{figure}
+
+Niestety tak krótki kabel ethernetowy (ok. $20\mathrm{cm}$) ma bardzo dużą sztywność i potrafi podnieść platformę Arduino, ponieważ ma ona niewielką masę.
 
 %---------------------------------------------------------------------------
 
