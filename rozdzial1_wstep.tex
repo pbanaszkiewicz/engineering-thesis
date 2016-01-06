@@ -48,7 +48,7 @@ System ESAV powinien być systemem bezobsługowym: raz skonfigurowany ma poprawn
 
 Na podstawie opisu z rozdziału \ref{sec:cele_projektu} wyznaczono poniższe cele funkcjonalne systemu ESAV:
 
-\begin{enumerate}
+\begin{enumerate}[label=1.2.\arabic*:]
 \item Moduł B przy braku zasilania ma odcinać zasilanie silnika samochodu.
 \item Po włączeniu moduł B ma oczekiwać na dane aktywujące jego pracę, które ma otrzymać od modułu A. Stan modułu B sygnalizowany jest migającą czerwoną diodą.
 \item Dopóki moduł B nie odbierze danych aktywujących, pojazd nie może się poruszać.
@@ -62,15 +62,15 @@ Na podstawie opisu z rozdziału \ref{sec:cele_projektu} wyznaczono poniższe cel
 
 %---------------------------------------------------------------------------
 
-\section{Wymagania wydajnościowe}
+\section{Wymagania użytkowe}
 \label{sec:wymagania_wydajnosciowe}
 
-Na podstawie opisu z rozdziału \ref{sec:cele_projektu} wyznaczono poniższe cele wydajnościowe systemu ESAV:
+Na podstawie opisu z rozdziału \ref{sec:cele_projektu} wyznaczono poniższe cele zasięgu, czasu oraz szybkości działania systemu ESAV:
 
 \begin{enumerate}
 \item System ESAV musi pracować bez konieczności wymiany bądź ładowania baterii (akumulatorów) przez minimum 5 godzin.
 \item System ESAV musi być w stanie co 1 sekundę odbierać i dekodować dane, a następnie je wysyłać.
-\item System ESAV musi pracować poprawnie na dystansie 30 metrów w otwartej przestrzeni.
+\item System ESAV musi pracować poprawnie na dystansie 100 metrów w otwartej przestrzeni.
 \item System ESAV musi pracować poprawnie w pomieszczeniach.
 \end{enumerate}
 
@@ -93,9 +93,9 @@ Na podstawie opisu z rozdziału \ref{sec:cele_projektu} wyznaczono poniższe cel
 
 Na podstawie opisu z rozdziału \ref{sec:cele_projektu} wyznaczono poniższe wymagania bezpieczeństwa przy korzystaniu z systemu ESAV:
 \begin{enumerate}
-\item Moduł B systemu ESAV nie może razić prądem.
+\item Moduł B systemu ESAV nie może doprowadzić do porażenia użytkownika prądem.
 \item Komunikacja pomiędzy modułami powinna zabezpieczać przed atakami powtórzenia poleceń operatora.
-\item Moduł B systemu ESAV nie może nagrzewać się powyżej temperatury $100\,^{\circ}\mathrm{C}$.
+\item Moduł B systemu ESAV nie może nagrzewać się powyżej temperatury $50\,^{\circ}\mathrm{C}$.
 \end{enumerate}
 
 %---------------------------------------------------------------------------
@@ -143,3 +143,5 @@ Podejście do projektu oparte o listę wymagań (ang. \textit{requirements-drive
 W tym rozdziale zostały wyszczególnione wymagania według sugerowanego schematu z~\cite{Hug10}, jednakże w przypadku projektów stricte programistycznych schemat ten może wyglądać inaczej.
 
 Skupienie się na wyszczególnieniu wymagań przed rozpoczęciem prac nad projektem znacząco ułatwiło jego tworzenie, m.in. poprzez eliminację luk w opisie funkcjonalnym systemu ESAV.
+
+%% Może warto by dodać rysunek poglądowy, samochód, osoba trzymająca wyłącznik - tak żeby było widać, że nie jest to zwykły wyłącznik ale coś więcej.

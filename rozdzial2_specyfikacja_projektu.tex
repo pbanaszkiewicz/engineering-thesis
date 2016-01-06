@@ -1,4 +1,4 @@
-\chapter{Specyfikacja projektu}
+\chapter{Wykonanie projektu}
 \label{cha:specyfikacja_projektu}
 
 W tym rozdziale opisane zostało wykonanie projektu zgodnie z wymaganiami postawionymi w rozdziale \ref{cha:wstep}.
@@ -20,6 +20,8 @@ Jest to moduł bazowy, tj. trzymany przez operatora w dłoni. Ze względu na uż
 	\includegraphics[scale=0.3]{pics/arduino_pro_scaled.jpg}
 	\caption{\label{fig:arduino_pro}Platforma sprzętowa Arduino Pro 328 5V 16MHz (zdjęcie: Piotr Banaszkiewicz).}
 \end{figure}
+
+\raggedbottom
 
 \subsection{Moduł B}
 \label{subsec:modul_b}
@@ -182,7 +184,7 @@ Na powyższych zdjęciach najcieplejszym elementem była śruba służąca do pr
 
 Ponadto należy zauważyć jak niewiele nagrzewał się radiator, do którego przymocowany został przekaźnik. To udowadnia, że jest on wystarczający dla zastosowania w samochodzie.
 
-Na samym końcu należy zauważyć, że przekaźnik nie powinien być w realnych zastosowaniach narażony na tak duże obciążenia przez tak długi czas; według obserwacji, pobór maksymalny chwilowy w trakcie przyspieszania pojazdu i skręcania jednocześnie wynosił około $ 50A $.
+Na samym końcu należy zauważyć, że przekaźnik nie powinien być w realnych zastosowaniach narażony na tak duże obciążenia przez tak długi czas; według obserwacji, maksymalny prąd chwilowy w trakcie przyspieszania pojazdu i skręcania jednocześnie wynosił około $ 50A $.
 
 %---------------------------------------------------------------------------
 
@@ -392,8 +394,6 @@ W związku z tym konieczne stało się stworzenie kabla pozwalającego łatwo pr
 	\caption{\label{fig:cable}Zdjęcie kabla wykorzystywanego do programowania Arduino (zdjęcie: Piotr Banaszkiewicz).}
 \end{figure}
 
-Niestety tak krótki kabel ethernetowy (ok. $20\mathrm{cm}$) ma bardzo dużą sztywność i potrafi podnieść platformę Arduino, ponieważ ma ona niewielką masę.
-
 %---------------------------------------------------------------------------
 
 \section{Zakres zrealizowanych wymagań}
@@ -405,7 +405,7 @@ W poniższej tabeli zestawiono założenia projektu wyszczególnione w rozdziale
 \caption{Macierz śledzenia wymagań (ang. \textit{requirements traceability matrix} \cite{Hug10}).} \label{tab:spelnione_wymagania} \\
 
 \toprule
-Numer wymagania & Wymagane? & Spełnione? & Jak? & Ref. \\
+Numer wymagania & Wymagane? & Spełnione? & Jak? & Rozdział \\
 \midrule
 
 1.2.1 & Tak & Tak & Przekaźnik typu \textit{Normally Open}. & \ref{subsec:odlaczanie_zalaczanie_silnika} \\ \hline
