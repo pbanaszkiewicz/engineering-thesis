@@ -48,16 +48,16 @@ System ESAV powinien być systemem bezobsługowym: raz skonfigurowany ma poprawn
 
 Na podstawie opisu z rozdziału \ref{sec:cele_projektu} wyznaczono poniższe cele funkcjonalne systemu ESAV:
 
-\begin{enumerate}[label=1.2.\arabic*:]
-\item Moduł B przy braku zasilania ma odcinać zasilanie silnika samochodu.
-\item Po włączeniu moduł B ma oczekiwać na dane aktywujące jego pracę, które ma otrzymać od modułu A. Stan modułu B sygnalizowany jest migającą czerwoną diodą.
-\item Dopóki moduł B nie odbierze danych aktywujących, pojazd nie może się poruszać.
-\item Po odebraniu danych aktywujących, moduł B powinien umożliwić jazdę samochodu. Stan modułu B sygnalizowany jest świecącą zieloną diodą.
-\item Jeżeli podczas działania moduł B przestanie odbierać transmisję, musi on przejść w tryb awaryjny. Stan modułu sygnalizowany jest ciągle świecącą się czerwoną diodą.
-\item Po naciśnięciu przycisku wyłączenia awaryjnego w module A przez operatora, moduł B musi przejść w tryb awaryjny. Stan modułu sygnalizowany jest ciągle świecącą się czerwoną diodą.
-\item Po zresetowaniu modułu B poprzez naciśnięcie przycisku „Reset”, moduł B powraca z trybu awaryjnego do stanu oczekiwania na dane aktywujące. Stan modułu sygnalizowany jest migającą czerwoną diodą.
-\item Po wyłączeniu zasilania modułu B musi nastąpić odłączenie zasilania silnika samochodu.
-\item Bateria (akumulator) modułu B może być ładowana w trakcie ładowania akumulatorów pojazdu.
+\begin{enumerate}[label=\thesection.\arabic{*}.,leftmargin=4em]
+\item \label{wym_fun1} Moduł B przy braku zasilania ma odcinać zasilanie silnika samochodu.
+\item \label{wym_fun2} Po włączeniu moduł B ma oczekiwać na dane aktywujące jego pracę, które ma otrzymać od modułu A. Stan modułu B sygnalizowany jest migającą czerwoną diodą.
+\item \label{wym_fun3} Dopóki moduł B nie odbierze danych aktywujących, pojazd nie może się poruszać.
+\item \label{wym_fun4} Po odebraniu danych aktywujących, moduł B powinien umożliwić jazdę samochodu. Stan modułu B sygnalizowany jest świecącą zieloną diodą.
+\item \label{wym_fun5} Jeżeli podczas działania moduł B przestanie odbierać transmisję, musi on przejść w tryb awaryjny. Stan modułu sygnalizowany jest ciągle świecącą się czerwoną diodą.
+\item \label{wym_fun6} Po naciśnięciu przycisku wyłączenia awaryjnego w module A przez operatora, moduł B musi przejść w tryb awaryjny. Stan modułu sygnalizowany jest ciągle świecącą się czerwoną diodą.
+\item \label{wym_fun7} Po zresetowaniu modułu B poprzez naciśnięcie przycisku „Reset”, moduł B powraca z trybu awaryjnego do stanu oczekiwania na dane aktywujące. Stan modułu sygnalizowany jest migającą czerwoną diodą.
+\item \label{wym_fun8} Po wyłączeniu zasilania modułu B musi nastąpić odłączenie zasilania silnika samochodu.
+\item \label{wym_fun9} Bateria (akumulator) modułu B może być ładowana w trakcie ładowania akumulatorów pojazdu.
 \end{enumerate}
 
 %---------------------------------------------------------------------------
@@ -67,11 +67,11 @@ Na podstawie opisu z rozdziału \ref{sec:cele_projektu} wyznaczono poniższe cel
 
 Na podstawie opisu z rozdziału \ref{sec:cele_projektu} wyznaczono poniższe cele zasięgu, czasu oraz szybkości działania systemu ESAV:
 
-\begin{enumerate}
-\item System ESAV musi pracować bez konieczności wymiany bądź ładowania baterii (akumulatorów) przez minimum 5 godzin.
-\item System ESAV musi być w stanie co 1 sekundę odbierać i dekodować dane, a następnie je wysyłać.
-\item System ESAV musi pracować poprawnie na dystansie 100 metrów w otwartej przestrzeni.
-\item System ESAV musi pracować poprawnie w pomieszczeniach.
+\begin{enumerate}[label=\thesection.\arabic{*}.,leftmargin=4em]
+\item \label{wym_uzyt1} System ESAV musi pracować bez konieczności wymiany bądź ładowania baterii (akumulatorów) przez minimum 5 godzin.
+\item \label{wym_uzyt2} System ESAV musi być w stanie co 1 sekundę odbierać i dekodować dane, a następnie je wysyłać.
+\item \label{wym_uzyt3} System ESAV musi pracować poprawnie na dystansie 100 metrów w otwartej przestrzeni.
+\item \label{wym_uzyt4} System ESAV musi pracować poprawnie w pomieszczeniach.
 \end{enumerate}
 
 %---------------------------------------------------------------------------
@@ -81,9 +81,9 @@ Na podstawie opisu z rozdziału \ref{sec:cele_projektu} wyznaczono poniższe cel
 
 Na podstawie opisu z rozdziału \ref{sec:cele_projektu} wyznaczono poniższe cele integracji systemu ESAV z innymi urządzeniami:
 
-\begin{enumerate}
-\item Moduł B musi poprawnie wyłączać silnik samochodu.
-\item Moduł B powinien mieć układ ładujący podłączony do systemu elektrycznego pojazdu.
+\begin{enumerate}[label=\thesection.\arabic{*}.,leftmargin=4em]
+\item \label{wym_wsp1} Moduł B musi poprawnie wyłączać silnik samochodu.
+\item \label{wym_wsp2} Moduł B powinien mieć układ ładujący podłączony do systemu elektrycznego pojazdu.
 \end{enumerate}
 
 %---------------------------------------------------------------------------
@@ -92,10 +92,10 @@ Na podstawie opisu z rozdziału \ref{sec:cele_projektu} wyznaczono poniższe cel
 \label{sec:wymagania_bezpieczenstwa}
 
 Na podstawie opisu z rozdziału \ref{sec:cele_projektu} wyznaczono poniższe wymagania bezpieczeństwa przy korzystaniu z systemu ESAV:
-\begin{enumerate}
-\item Moduł B systemu ESAV nie może doprowadzić do porażenia użytkownika prądem.
-\item Komunikacja pomiędzy modułami powinna zabezpieczać przed atakami powtórzenia poleceń operatora.
-\item Moduł B systemu ESAV nie może nagrzewać się powyżej temperatury $50\,^{\circ}\mathrm{C}$.
+\begin{enumerate}[label=\thesection.\arabic{*}.,leftmargin=4em]
+\item \label{wym_bezp1} Moduł B systemu ESAV nie może doprowadzić do porażenia użytkownika prądem.
+\item \label{wym_bezp2} Komunikacja pomiędzy modułami powinna zabezpieczać przed atakami powtórzenia poleceń operatora.
+\item \label{wym_bezp3} Moduł B systemu ESAV nie może nagrzewać się powyżej temperatury $50\,^{\circ}\mathrm{C}$.
 \end{enumerate}
 
 %---------------------------------------------------------------------------
@@ -107,29 +107,29 @@ Wymagania, które nie zostały jawnie wspomniane w rozdziałach \ref{sec:wymagan
 
 Moduł B musi:
 
-\begin{enumerate}
-\item monitorować poziom naładowania (napięcie) na baterii zasilającej,
-\item sygnalizować włączenie trybu awaryjnego świeceniem czerwonej diody,
-\item sygnalizować oczekiwanie na transmisję miganiem czerwonej diody,
-\item sygnalizować poprawne działanie świeceniem zielonej diody.
+\begin{enumerate}[label=\thesection.\arabic{*}.,leftmargin=4em]
+\item \label{wym_poch1} monitorować poziom naładowania (napięcie) na baterii zasilającej,
+\item \label{wym_poch2} sygnalizować włączenie trybu awaryjnego świeceniem czerwonej diody,
+\item \label{wym_poch3} sygnalizować oczekiwanie na transmisję miganiem czerwonej diody,
+\item \label{wym_poch4} sygnalizować poprawne działanie świeceniem zielonej diody.
 \end{enumerate}
 
 Moduł A musi:
 
-\begin{enumerate}
+\begin{enumerate}[label=\thesection.\arabic{*}.,leftmargin=4em]
 \setcounter{enumi}{4}
-\item monitorować poziom naładowania (napięcie) na baterii zasilającej,
-\item sygnalizować wysyłanie informacji miganiem zielonej diody,
-\item mieć małe wymiary (aby możliwe było trzymania go w dłoniach).
+\item \label{wym_poch5} monitorować poziom naładowania (napięcie) na baterii zasilającej,
+\item \label{wym_poch6} sygnalizować wysyłanie informacji miganiem zielonej diody,
+\item \label{wym_poch7} mieć małe wymiary (aby możliwe było trzymania go w dłoniach).
 \end{enumerate}
 
 Komunikacja między modułami powinna umożliwiać wymianę takich informacji:
 
-\begin{enumerate}
+\begin{enumerate}[label=\thesection.\arabic{*}.,leftmargin=4em]
 \setcounter{enumi}{7}
-\item PING: wymiana danych co około sekundę (do weryfikacji istnienia połączenia),
-\item STOP: do wysłania danych w celu natychmiastowego przejścia modułu B w tryb awaryjny,
-\item DATA: do wymiany danych diagnostycznych (np. napięcia baterii).
+\item \label{wym_poch8} PING: wymiana danych co około sekundę (do weryfikacji istnienia połączenia),
+\item \label{wym_poch9} STOP: do wysłania danych w celu natychmiastowego przejścia modułu B w tryb awaryjny,
+\item \label{wym_poch10} DATA: do wymiany danych diagnostycznych (np. napięcia baterii).
 \end{enumerate}
 
 
