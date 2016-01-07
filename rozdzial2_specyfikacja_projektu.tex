@@ -39,18 +39,18 @@ Jest to moduł, który został zamontowany w samochodzie. Jako platformę użyte
 
 Obydwa moduły sprzętowe są zasilane z powerbanków Solo5 10000 mAh firmy Romoss. Posiadają one wbudowane różne zabezpieczenia, m.in.: natężeniowe (dla zachowania żywotności), temperaturowe czy zwarciowe (ang. \textit{short-circuit}). Mają również układ, który wyłącza powerbank w sytuacji, gdy prąd ładowania jest bardzo niewielki \cite{Romoss}.
 
-Moduły A i B pobierają bardzo niewiele prądu (zmierzone: między 20 a 50 mA), więc aby powstrzymać powerbanki przed rozłączaniem zwarto masę i źródło energii dwunastoma (w przypadku modułu A) lub trzynastoma (w przypadku modułu B) rezystorami $ 910 \Omega $ wpiętymi równolegle.
+Moduły A i B pobierają bardzo niewiele prądu (zmierzone: między \SI{20}{\milli\ampere} a \SI{50}{\milli\ampere}), więc aby powstrzymać powerbanki przed rozłączaniem zwarto masę i źródło energii dwunastoma (w przypadku modułu A) lub trzynastoma (w przypadku modułu B) rezystorami \SI{910}{\ohm} wpiętymi równolegle.
 
-Połączenie równoległe takiej ilości rezystorów daje dość niską rezystancję zastępczą (teoretycznie: $ 75.83 \Omega $ dla modułu A, $ 70 \Omega $ dla modułu B; praktycznie: występują różnice w faktycznych wartościach rezystancji rezystorów, zwłaszcza gdy te się nagrzeją) i pozwala na obniżenie wydzielanego ciepła na rezystorach, co skutkuje:
+Połączenie równoległe takiej ilości rezystorów daje dość niską rezystancję zastępczą (teoretycznie: \SI{75.83}{\ohm} dla modułu A, \SI{70}{\ohm} dla modułu B; praktycznie: występują różnice w faktycznych wartościach rezystancji rezystorów, zwłaszcza gdy te się nagrzeją) i pozwala na obniżenie wydzielanego ciepła na rezystorach, co skutkuje:
 
 \begin{itemize}
 \item większym poborem prądu, dzięki czemu powerbanki się nie wyłączają,
-\item nagrzewaniem rezystorów (z prawa Ohma: $ P = \dfrac{U^2}{R} = \dfrac{(5.1)^2}{900} = 0.0289 [W] $, gdzie $ 5.1 [V] $ to zmierzone napięcie na rezystorze, a $ 900 [\Omega] $ to przybliżona rezystancja nagrzanego rezystora), a więc w przypadku 12 rezystorów położonych bardzo blisko siebie mamy około $ 0.34 [W] $ wydzielanej mocy w tym miejscu.
+\item nagrzewaniem rezystorów (z prawa Ohma: $ P = \dfrac{U^2}{R} = \dfrac{(5,1)^2}{900} = 0,0289 [W] $, gdzie \SI{5.1}{\volt} to zmierzone napięcie na rezystorze, a \SI{900}{\ohm} to przybliżona rezystancja nagrzanego rezystora), a więc w przypadku 12 rezystorów położonych bardzo blisko siebie mamy około \SI{0.34}{\watt} wydzielanej mocy w tym miejscu.
 \end{itemize}
 
 Ponadto banki energii umożliwiają jednoczesne ładowanie jak i rozładowywanie, tzn. jest możliwe wpięcie źródła zasilania na wejście powerbanku, jak i obciążenia na jego wyjście. Dzięki temu powerbank zasilający moduł B można ładować z portu USB znajdującego się w~samochodzie.
 
-Sama pojemność 10000mAh teoretycznie\footnote{W praktyce pojemność 10000mAh jest nieosiągalna, gdyż powerbanki posiadają mechanizmy wydłużające ich żywotność; polega to na ładowaniu akumulatorów powerbanku tylko do pewnego stopnia.} pozwala na zasilanie układu pobierającego 100mA przez 100 godzin lub układu pobierającego 200mA przez 50 godzin. Każdy z modułów A i B po obciążeniu przez rezystory pobierał między 100 a 200 mA. Poziom naładowania powerbanków można obserwować na ich diodowych wskaźnikach.
+Sama pojemność \SI{10000}{\milli\ampere\hour} teoretycznie\footnote{W praktyce pojemność \SI{10000}{\milli\ampere\hour} jest nieosiągalna, gdyż powerbanki posiadają mechanizmy wydłużające ich żywotność; polega to na ładowaniu akumulatorów powerbanku tylko do pewnego stopnia.} pozwala na zasilanie układu pobierającego \SI{100}{\milli\ampere} przez 100 godzin lub układu pobierającego \SI{200}{\milli\ampere} przez 50 godzin. Każdy z modułów A i B po obciążeniu przez rezystory pobierał między \num{100} a \SI{200}{\milli\ampere}. Poziom naładowania powerbanków można obserwować na ich diodowych wskaźnikach.
 
 \subsection{Komunikacja}
 \label{subsec:komunikacja}
@@ -114,9 +114,9 @@ Bardzo podobnie wygląda symboliczny schemat połączeń modułu B, z tym że on
 
 Pomiędzy kabel zasilający a moduł sterujący pracą silnika samochodu został wpięty przekaźnik ASR-90DD-H (zob. zdjęcie \ref{fig:SSR_relay}). Moduł sterujący odpowiedzialny jest za przetworzenie napięcia stałego na prąd zmienny poprowadzony bezpośrednio na uzwojenia silnika.
 
-Przekaźnik ASR-90DD-H jest to przekaźnik półprzewodnikowy sterowany napięciem 3–32VDC, a zatem typu \textit{Normally Open}. Przekaźnik jest sterowany wyjściem z modułu B (zob. element ,,RELAY'' na schemacie \ref{fig:symbolic_schema_B}).
+Przekaźnik ASR-90DD-H jest to przekaźnik półprzewodnikowy, a zatem typu \textit{Normally Open}, sterowany napięciem stałym \num{3}--\SI{32}{\volt}. Przekaźnik jest sterowany wyjściem z modułu B (zob. element ,,RELAY'' na schemacie \ref{fig:symbolic_schema_B}).
 
-Według danych producenta, przekaźnik jest w stanie obsłużyć na wyjściu mocy do 90A prądu stałego pod napięciem do 240V. Wybrano przekaźnik mocno przekraczający spodziewane natężenie prądu, gdyż zapewnia to mniejsze wydzielanie ciepła (zob. rozdział \ref{subsec:chlodzenie_SSR}).
+Według danych producenta, przekaźnik jest w stanie obsłużyć na wyjściu mocy do \SI{90}{\ampere} prądu stałego pod napięciem do \SI{240}{\volt}. Wybrano przekaźnik mocno przekraczający spodziewane natężenie prądu, gdyż zapewnia to mniejsze wydzielanie ciepła (zob. rozdział \ref{subsec:chlodzenie_SSR}).
 
 Niestety producent nie udostępnia schematu elektrycznego przekaźnika w dokumentacji \cite{ASR90DDH}, więc podczas jego montażu zadbano o kilka elementów bezpieczeństwa:
 
@@ -149,12 +149,12 @@ Przekaźnik został umieszczony na radiatorze i pracował przez kilka minut (do 
         \caption{Parametry eksperymentu obciążenia przekaźnika półprzewodnikowego}
         \label{tab:eksperyment}
         
-        \begin{tabularx}{0.9\textwidth}{cccXX}
+        \begin{tabularx}{0.9\textwidth}{ccccX}
             \toprule
-            Czas obciążenia [min] & Napięcie [V] & Natężenie [A] & Temperatura radiatora\tnote{a} [\degree C] & Temperatura obudowy przekaźnika\tnote{a} [\degree C] \\
+            Czas obciążenia & Napięcie & Natężenie & Temperatura radiatora\tnote{a} & Temperatura obudowy przekaźnika\tnote{a} \\
             \midrule
-            8 & 45 & 36 & 25 & ok. 60 \\
-            8 & 42.5 & 43 & 25 -- 35 & ok. 90 \\
+            \SI{8}{\minute} & \SI{45}{\volt} & \SI{36}{\ampere} & \SI{25}{\celsius} & ok. \SI{60}{\celsius} \\
+            \SI{8}{\minute} & \SI{42.5}{\volt} & \SI{43}{\ampere} & \num{25}--\SI{35}{\celsius} & ok. \SI{90}{\celsius} \\
             \bottomrule
         \end{tabularx}
         
@@ -180,11 +180,11 @@ Przekaźnik został umieszczony na radiatorze i pracował przez kilka minut (do 
 	\caption{\label{fig:flir2}Obraz uzyskany za pomocą kamery termowizyjnej na koniec trwania eksperymentu z większym obciążeniem (zdjęcie: Marek Długosz).}
 \end{figure}
 
-Na powyższych zdjęciach najcieplejszym elementem była śruba służąca do przykręcenia kabla zasilającego. Temperatura ciepłego miejsca na obudowie przekaźnika była o około $ 15^{\circ}\mathrm{C} $ niższa; uwzględnione to zostało w tabeli \ref{tab:eksperyment} poprzez odjęcie ok. $ 10^{\circ}\mathrm{C} $ od maksymalnej mierzonej temperatury.
+Na powyższych zdjęciach najcieplejszym elementem była śruba służąca do przykręcenia kabla zasilającego. Temperatura ciepłego miejsca na obudowie przekaźnika była o około \SI{15}{\celsius} niższa; uwzględnione to zostało w tabeli \ref{tab:eksperyment} poprzez odjęcie ok. \SI{10}{\celsius} od maksymalnej mierzonej temperatury.
 
 Ponadto należy zauważyć jak niewiele nagrzewał się radiator, do którego przymocowany został przekaźnik. To udowadnia, że jest on wystarczający dla zastosowania w samochodzie.
 
-Na samym końcu należy zauważyć, że przekaźnik nie powinien być w realnych zastosowaniach narażony na tak duże obciążenia przez tak długi czas; według obserwacji, maksymalny prąd chwilowy w trakcie przyspieszania pojazdu i skręcania jednocześnie wynosił około $ 50A $.
+Na samym końcu należy zauważyć, że przekaźnik nie powinien być w realnych zastosowaniach narażony na tak duże obciążenia przez tak długi czas; według obserwacji, maksymalny prąd chwilowy w trakcie przyspieszania pojazdu i skręcania jednocześnie wynosił około \SI{50}{\ampere}.
 
 %---------------------------------------------------------------------------
 
@@ -417,7 +417,7 @@ Numer wymagania & Wymagane? & Spełnione? & Jak? & Roz. \\
 \ref{wym_fun7} & Tak & Tak & Podpięcie przycisku ,,RESET'' do pinu RESET modułu B. & \ref{subsec:panel_operatorski} \\ \hline
 \ref{wym_fun8} & Tak & Tak & Przekaźnik typu \textit{Normally Open}. & \ref{subsec:odlaczanie_zalaczanie_silnika} \\ \hline
 \ref{wym_fun9} & Nie & Nie & Zakupione powerbanki umożliwiają ładowanie podczas używania ich, jednakże to w gestii użytkownika jest korzystanie z tej możliwości. & \ref{subsec:zasilanie} \\ \hline
-\ref{wym_uzyt1} & Tak & Tak & Powerbanki powinny teoretycznie zapewnić zasilanie przez około 50–100 godzin. & \ref{subsec:zasilanie} \\ \hline
+\ref{wym_uzyt1} & Tak & Tak & Powerbanki powinny teoretycznie zapewnić zasilanie przez około \num{50}--\num{100} godzin. & \ref{subsec:zasilanie} \\ \hline
 \ref{wym_uzyt2} & Tak & Tak & Prędkość przesyłania danych między modułami HC-12 wynosi 5000bps. & \ref{subsec:komunikacja} \\ \hline
 \ref{wym_uzyt3} & Tak & Tak & Przetestowano &  \\ \hline  %% podaj wartosc
 \ref{wym_uzyt4} & Tak & Tak & Przetestowano &  \\ \hline  %% podaj wartosc
@@ -425,7 +425,7 @@ Numer wymagania & Wymagane? & Spełnione? & Jak? & Roz. \\
 \ref{wym_wsp2} & Nie & Nie & Zakupione powerbanki umożliwiają ładowanie podczas używania ich, jednakże to w gestii użytkownika jest korzystanie z tej możliwości. & \ref{subsec:zasilanie} \\ \hline
 \ref{wym_bezp1} & Tak & Tak & Wejście sterowania przekaźnika jest optoizolowane. & \ref{subsec:odlaczanie_zalaczanie_silnika} \\ \hline  %% aktualizuj bazujac na dokumentacji od ANLY?
 \ref{wym_bezp2} & Tak & Tak & Komunikacja pomiędzy modułami polega na wymianie szyfrowanego licznika. & \ref{subsec:szyfrowanie_komunikacji} \\ \hline
-\ref{wym_bezp3} & Tak & Tak & Przekaźnik dopiero wystawiony na bardzo długie działanie pod wysokim obciążeniem może osiągnąć temperaturę $100\,^{\circ}\mathrm{C}$. & \ref{subsec:chlodzenie_SSR} \\ \hline
+\ref{wym_bezp3} & Tak & Tak & Przekaźnik dopiero wystawiony na bardzo długie działanie pod wysokim obciążeniem może osiągnąć temperaturę \SI{100}{\celsius}. & \ref{subsec:chlodzenie_SSR} \\ \hline
 \ref{wym_poch1} & Nie & Nie & Poziom naładowania jest wyświetlany na obudowie powerbanku, więc nie ma konieczności dodatkowego monitorowania przez moduł B. & \ref{subsec:zasilanie} \\ \hline
 \ref{wym_poch2} & Tak & Tak & Spełnione dosłownie. & \ref{subsec:panel_operatorski} \\ \hline
 \ref{wym_poch3} & Tak & Tak & Spełnione dosłownie. & \ref{subsec:panel_operatorski} \\ \hline
