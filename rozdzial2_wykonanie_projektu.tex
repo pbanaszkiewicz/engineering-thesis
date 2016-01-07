@@ -57,6 +57,8 @@ Sama pojemność \SI{10000}{\milli\ampere\hour} teoretycznie\footnote{W praktyce
 
 Do komunikacji wykorzystano parę modułów radiowych HC-12 433 MHz \cite{HC12}, które łączą się z~platformami sprzętowymi za pomocą łącza szeregowego. Prędkość komunikacji takiego modułu w powietrzu wynosi 5000bps, czyli typowe pakiety przesyłane przez system (zob. rozdział \ref{subsec:format_pakietow}), mające rozmiar $ 4B=32b $ są przesyłane w ułamku sekundy.
 
+Zasięg komunikacji modułów został przetestowany i wynosi \SI{25}{\meter} w pomieszczeniu (przy braku ścian pomiędzy modułami) oraz \SI{100}{\meter} na otwartej przestrzeni. Gdyby odległości te były niewystarczające, HC-12 umożliwia podpięcie silniejszej zewnętrznej anteny \cite{HC12} na złączu U.FL.
+
 \subsection{Obudowy}
 \label{subsec:obudowy}
 
@@ -419,8 +421,8 @@ Numer wymagania & Wymagane? & Spełnione? & Jak? & Roz. \\
 \ref{wym_fun9} & Nie & Nie & Zakupione powerbanki umożliwiają ładowanie podczas używania ich, jednakże to w gestii użytkownika jest korzystanie z tej możliwości. & \ref{subsec:zasilanie} \\ \hline
 \ref{wym_uzyt1} & Tak & Tak & Powerbanki powinny teoretycznie zapewnić zasilanie przez około \num{50}--\num{100} godzin. & \ref{subsec:zasilanie} \\ \hline
 \ref{wym_uzyt2} & Tak & Tak & Prędkość przesyłania danych między modułami HC-12 wynosi 5000bps. & \ref{subsec:komunikacja} \\ \hline
-\ref{wym_uzyt3} & Tak & Tak & Przetestowano &  \\ \hline  %% podaj wartosc
-\ref{wym_uzyt4} & Tak & Tak & Przetestowano &  \\ \hline  %% podaj wartosc
+\ref{wym_uzyt3} & Tak & Tak & Zasięg \SI{100}{\meter} na otwartej przestrzeni. & \ref{subsec:komunikacja} \\ \hline
+\ref{wym_uzyt4} & Tak & Tak & Zasięg \SI{25}{\meter} w pomieszczeniach (przy braku ścian pomiędzy modułami). & \ref{subsec:komunikacja} \\ \hline
 \ref{wym_wsp1} & Tak & Tak & Moduł B odłącza zasilanie modułu, który bezpośrednio zasila silnik samochodu. & \ref{subsec:odlaczanie_zalaczanie_silnika} \\ \hline
 \ref{wym_wsp2} & Nie & Nie & Zakupione powerbanki umożliwiają ładowanie podczas używania ich, jednakże to w gestii użytkownika jest korzystanie z tej możliwości. & \ref{subsec:zasilanie} \\ \hline
 \ref{wym_bezp1} & Tak & Tak & Wejście sterowania przekaźnika jest optoizolowane. & \ref{subsec:odlaczanie_zalaczanie_silnika} \\ \hline  %% aktualizuj bazujac na dokumentacji od ANLY?
