@@ -1,4 +1,23 @@
 \chapter{Podsumowanie projektu}
 \label{cha:podsumowanie}
 
-Podsumowanie całej pracy i efekty.
+Celem niniejszej pracy inżynierskiej było stworzenie narzędzia ułatwiającego bezpieczne testowanie elektrycznego samochodu autonomicznego w laboratorium AGH--Delphi.
+
+Za wkład własny w pracę uważam zrealizowanie następujących zagadnień:
+
+\begin{itemize}
+\item zebranie wymagań (któremu poświęcono prawie cały rozdział \ref{cha:wstep}),
+\item stworzenie pierwszego prototypu systemu (nieopisanego w tej pracy, bazującego na architekturze Raspberry Pi i sieci WiFi),
+\item opracowanie schematów logicznych oraz formatu komunikacji między modułami (\ref{subsec:schematy_cykli_dzialan}, \ref{subsec:format_pakietow}),
+\item zbudowanie drugiego prototypu systemu, już przy wykorzystaniu platformy docelowej Arduino i~płytek wielostykowych do podłączenia elementów panelu operatora oraz modułów komunikacyjnych,
+\item wykonanie kabla pozwalającego programować Arduino (\ref{subsec:kabel_do_programowania_arduino}),
+\item zaimplementowanie algorytmów na podstawie opisanej logiki oraz komunikacji (\ref{subsec:maszyna_stanow}) i wgranie ich na Arduino,
+\item przetestowanie poprawności działania algorytmów,
+\item zbudowanie trwałych nakładek na platformy (\ref{subsec:obudowy}),
+\item dobranie przekaźnika sterującego silnikiem (\ref{subsec:odlaczanie_zalaczanie_silnika}),
+\item sprawdzenie, wraz z opiekunem pracy doktorem Markiem Długoszem, ilości wydzielanego ciepła przez przekaźnik pod obciążeniem (\ref{subsec:chlodzenie_SSR}).
+\end{itemize}
+
+Jak można odczytać z tabeli \ref{tab:spelnione_wymagania}, wszystkie wymagania zostały spełnione, a więc projekt zakończył się sukcesem.
+
+Pomimo konieczności spełnienia dokładnie jednej funkcji (szybkiego wyłączenia samochodu w momencie zagrożenia), istnieją pewne możliwości dalszego rozwoju projektu. Po pierwsze można rozszerzyć jego działanie do dodatkowego hamowania pojazdu, które jest osiągalne poprzez przełączenie silnika w tryb generatora. Po drugie, można wykorzystać komunikację między modułami A i B do przesyłania informacji diagnostycznych samochodu do operatora, co w dalej umożliwiłoby użycie projektu jako swoistego zdalnego centrum diagnostycznego samochodu.
