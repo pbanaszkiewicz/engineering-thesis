@@ -64,6 +64,9 @@ void loop() {
       } else {
         // something's wrong, that's not the start of the conversation
       }
+
+      // drop any further messages
+      serialFlush();
     }
 
     red_led = !red_led;
@@ -117,6 +120,18 @@ void loop() {
   } else {
     // unknown state, let's stop
     state = STOP;
+  }
+}
+
+void serialFlush() {
+  int ch;
+  while (Serial.available() > 0) {
+    ch = Serial.read();
+
+    // flush only incomplete package
+    if (ch == 0x00) {
+      break;
+    }
   }
 }
 
