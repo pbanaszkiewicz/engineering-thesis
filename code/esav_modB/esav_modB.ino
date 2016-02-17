@@ -138,6 +138,6 @@ byte readStopByte(byte* buf) {
 }
 
 bool isConversationStart(byte* buf) {
-  return buf[0] == 0xFF && buf[1] == 0xFF && buf[2] == 0xFF && buf[3] == 0x00;
+  return buf[0] == 0x33 && buf[1] == 0xFF && buf[2] == 0xFF && buf[3] == 0x00;
 }
 

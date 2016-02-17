@@ -50,7 +50,7 @@ void loop() {
       }
     } else {
       // send greetings
-      out_buffer[0] = 0xFF;
+      out_buffer[0] = 0x33;
       out_buffer[1] = 0xFF;
       out_buffer[2] = 0xFF;
       out_buffer[3] = 0x00;
