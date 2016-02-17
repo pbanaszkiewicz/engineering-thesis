@@ -45,7 +45,7 @@ void loop() {
     // wait for the activation data (greetings) && blink red
     
     if (Serial.available()) {
-      Serial.readBytesUntil(package_end, in_buffer, package_length);
+      Serial.readBytes(in_buffer, package_length);
 
       if (isConversationStart(in_buffer)) {
         // correctly started the conversation

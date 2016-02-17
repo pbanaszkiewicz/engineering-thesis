@@ -42,7 +42,7 @@ void loop() {
     
     if (Serial.available()) {
       // receive RSVP
-      Serial.readBytesUntil(package_end, in_buffer, package_length);
+      Serial.readBytes(in_buffer, package_length);
 
       if (isConversationRSVP(in_buffer)) {
         state = PING;
