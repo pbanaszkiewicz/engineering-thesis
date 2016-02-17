@@ -84,7 +84,7 @@ void loop() {
       Serial.readBytes(in_buffer, package_length);
       decrypt_array(in_buffer, package_length);
 
-      if (readEmergencyByte(in_buffer) == 0xFF) {
+      if (isEmergencyStop(in_buffer)) {
         state = STOP;
       } else if (counter != readCounter(in_buffer)) {
         state = STOP;
@@ -125,8 +125,8 @@ void enableRelay(const int pin) {
   digitalWrite(pin, HIGH);
 }
 
-byte readEmergencyByte(byte* buf) {
-  return buf[0];
+byte isEmergencyStop(byte* buf) {
+  return buf[0] == 0xFF;
 }
 
 unsigned int readCounter(byte* buf) {
