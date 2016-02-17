@@ -29,17 +29,19 @@ volatile bool emergency = false;
 void setup() {
   pinMode(green_led_pin, OUTPUT);
   pinMode(stop_pin, INPUT);
-  
+
   Serial.begin(9600);  // pins 0 and 1
   Serial.setTimeout(1000);
-  
+
   attachInterrupt(digitalPinToInterrupt(stop_pin), emergencyInterrupt, RISING);
 }
 
 void loop() {
   if (state == CONNECTING) {
     // try to initialize the conversation
-    
+
+    counter = 0; // just in case
+
     if (Serial.available()) {
       // receive RSVP
       Serial.readBytes(in_buffer, package_length);
@@ -56,13 +58,13 @@ void loop() {
       out_buffer[3] = 0x00;
 
       Serial.write(out_buffer, package_length);
-      
+
       green_led = !green_led;
       digitalWrite(green_led_pin, green_led);
       delay(1000);
-      
+
     }
-    
+
   } else if (state == PING) {
     ++counter;
 
@@ -73,23 +75,25 @@ void loop() {
 
       green_led = true;
       digitalWrite(green_led_pin, green_led);
-      
+
       writeCounter(counter, out_buffer);
       encrypt_array(out_buffer, package_length);
       Serial.write(out_buffer, package_length);
-      
+
       green_led = false;
       digitalWrite(green_led_pin, green_led);
-  
+
       delay(1000);
     }
     
   } else if (state == STOP) {
+    counter = 0; // just in case
+
     setEmergency(out_buffer);
     Serial.write(out_buffer, package_length);
-    
+
     delay(500); // run this faster, for safety sake
-    
+
   } else {
     // unknown state
     state = STOP;
@@ -107,6 +111,8 @@ void writeCounter(unsigned int counter, byte* buf) {
 
 void setEmergency(byte* buf) {
   buf[0] = 0xFF;
+  buf[1] = 0xFF;
+  buf[2] = 0xFF;
 }
 
 void emergencyInterrupt() {

@@ -43,7 +43,9 @@ void setup() {
 void loop() {
   if (state == WAIT) {
     // wait for the activation data (greetings) && blink red
-    
+
+    counter = 0; // just in case
+
     if (Serial.available()) {
       Serial.readBytes(in_buffer, package_length);
 
@@ -56,9 +58,9 @@ void loop() {
         out_buffer[1] = 0xFF;
         out_buffer[2] = 0xFF;
         out_buffer[3] = 0x00;
-        
+
         Serial.write(out_buffer, package_length);
-        
+
       } else {
         // something's wrong, that's not the start of the conversation
       }
@@ -67,7 +69,7 @@ void loop() {
     red_led = !red_led;
     digitalWrite(red_led_pin, red_led);
     delay(1000);
-    
+
   } else if (state == RUN) {
     // running
 
@@ -76,11 +78,11 @@ void loop() {
     digitalWrite(green_led_pin, green_led);
     digitalWrite(red_led_pin, red_led);
     enableRelay(relay_pin);
-    
+
     if (Serial.available()) {
       no_data_counter = 0;
       ++counter;
-      
+
       Serial.readBytes(in_buffer, package_length);
       decrypt_array(in_buffer, package_length);
 
@@ -91,10 +93,10 @@ void loop() {
       } else {
         delay(1000);
       }
-      
+
     } else {
       // no response, therefore we should stop
-      
+
       if (no_data_counter == 3) {
         state = STOP;
       } else {
@@ -102,15 +104,16 @@ void loop() {
         ++no_data_counter;
       }
     }
-    
-    
+
   } else if (state == STOP) {
+    counter = 0; // just in case
+
     disableRelay(relay_pin);
     green_led = false;
     red_led = true;
     digitalWrite(green_led_pin, green_led);
     digitalWrite(red_led_pin, red_led);
-    
+
   } else {
     // unknown state, let's stop
     state = STOP;
@@ -131,10 +134,6 @@ byte isEmergencyStop(byte* buf) {
 
 unsigned int readCounter(byte* buf) {
   return buf[1] * 256 + buf[2];
-}
-
-byte readStopByte(byte* buf) {
-  return buf[3];
 }
 
 bool isConversationStart(byte* buf) {
