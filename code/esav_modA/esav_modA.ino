@@ -90,6 +90,7 @@ void loop() {
     counter = 0; // just in case
 
     setEmergency(out_buffer);
+    encrypt_array(out_buffer, package_length);
     Serial.write(out_buffer, package_length);
 
     delay(500); // run this faster, for safety sake
