@@ -69,9 +69,12 @@ void loop() {
       serialFlush();
     }
 
-    red_led = !red_led;
-    digitalWrite(red_led_pin, red_led);
-    delay(1000);
+    if (state == WAIT) {
+      // don't wait if we decided to go to RUN
+      red_led = !red_led;
+      digitalWrite(red_led_pin, red_led);
+      delay(1100);
+    }
 
   } else if (state == RUN) {
     // running
