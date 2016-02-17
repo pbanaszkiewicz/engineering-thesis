@@ -10,7 +10,7 @@ const unsigned int green_led_pin = 6;
 bool green_led = false;
 
 // relay
-const unsigned int relay_pin = 13;
+const unsigned int relay_pin = 5;
 
 // application states
 const unsigned int WAIT = 0;
@@ -66,7 +66,7 @@ void loop() {
 
     red_led = !red_led;
     digitalWrite(red_led_pin, red_led);
-    delay(100);
+    delay(1000);
     
   } else if (state == RUN) {
     // running
