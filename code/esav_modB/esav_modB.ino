@@ -9,6 +9,9 @@ bool red_led = false;
 const unsigned int green_led_pin = 6;
 bool green_led = false;
 
+// REMOTE ON/OFF button
+const unsigned int remote_button_pin = 4;
+
 // relay
 const unsigned int relay_pin = 5;
 
@@ -16,6 +19,7 @@ const unsigned int relay_pin = 5;
 const unsigned int WAIT = 0;
 const unsigned int RUN = 1;
 const unsigned int STOP = 2;
+const unsigned int REMOTE_OFF = 3; // relay stays always on
 
 // initial state
 unsigned int state = WAIT;
@@ -31,6 +35,8 @@ void setup() {
   pinMode(red_led_pin, OUTPUT);
   pinMode(green_led_pin, OUTPUT);
   pinMode(relay_pin, OUTPUT);
+  // it may hang so let's pull it up (this inverts logic!)
+  pinMode(remote_button_pin, INPUT_PULLUP);
 
   // start serial connection
   Serial.begin(9600);  // pins 0 and 1
@@ -41,7 +47,15 @@ void setup() {
 }
 
 void loop() {
+  if (remote(remote_button_pin) && state == REMOTE_OFF) {
+    state = WAIT;
+  } else if (!remote(remote_button_pin)) {
+    state = REMOTE_OFF;
+  }
+
   if (state == WAIT) {
+    disableRelay(relay_pin);
+
     // wait for the activation data (greetings) && blink red
 
     counter = 0; // just in case
@@ -120,10 +134,18 @@ void loop() {
     digitalWrite(green_led_pin, green_led);
     digitalWrite(red_led_pin, red_led);
 
+  } else if (state == REMOTE_OFF) {
+    enableRelay(relay_pin);
+
   } else {
     // unknown state, let's stop
     state = STOP;
   }
+}
+
+bool remote(const unsigned int pin) {
+  // it's inverted because of PULLUP resistor
+  return !digitalRead(pin);
 }
 
 void serialFlush() {
