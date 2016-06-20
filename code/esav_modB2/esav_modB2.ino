@@ -59,9 +59,9 @@ void loop() {
   set_buffer(out_buffer, 0x00, 0x00);
   
   // handle debug mode
-  if (debug_on(remote_button_pin) && state == DEBUG) {
+  if (!debug_on(remote_button_pin) && state == DEBUG) {
     state = WAIT;
-  } else if (!debug_on(remote_button_pin)) {
+  } else if (debug_on(remote_button_pin)) {
     state = DEBUG;
   }
 
@@ -169,12 +169,16 @@ void loop() {
 
   // enable the relay
   // relay: on
-  // red led: off
-  // green led: off
+  // red led: quickly toggle
+  // green led: quickly toggle with other phase than red led
   else if (state == DEBUG) {
     relay(relay_pin, true);
-    red_led = false; led(red_led_pin, red_led);
-    green_led = false; led(green_led_pin, green_led);
+    red_led = !red_led; led(red_led_pin, red_led);
+    green_led = !red_led; led(green_led_pin, green_led);
+
+    state = DEBUG;
+    serial_flush_all();
+    delay(500);
   }
 
   else {
@@ -200,7 +204,7 @@ void led(const unsigned int pin, const bool state) {
 
 bool debug_on(const unsigned int pin) {
   // Decide if debug mode should be on based on pin state.
-  return !digitalRead(pin);
+  return digitalRead(pin);
 }
 
 bool is_ping(byte *buf) {
@@ -223,6 +227,15 @@ void serial_flush() {
     if (ch == EOM) {
       break;
     }
+  }
+}
+
+void serial_flush_all() {
+  // Since Arduino 1.0, the Serial.flush() only removes outgoing data,
+  // not incoming. This function all leftover chars in the incoming buffer.
+  int ch;
+  while (Serial.available() > 0) {
+    ch = Serial.read();
   }
 }
 
